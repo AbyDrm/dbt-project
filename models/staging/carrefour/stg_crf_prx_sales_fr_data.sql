@@ -1,0 +1,16 @@
+with source as (
+
+    select
+        cast(barcode_ean13 as string)        as barcode,
+        cast(site_key as int64)              as site_key,
+        cast(product_CATEGORY as string)     as product_category,
+        cast(pdt_SUB_CATEGORY as string)     as product_sub_category,
+        DATE                                 as sales_date,
+        cast(CA as float64)                  as ca
+
+    from {{ source('dbt_carrefour', 'crf_prx_sales_fr_data') }}
+
+)
+
+select *
+from source
